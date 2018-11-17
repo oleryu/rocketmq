@@ -6,6 +6,7 @@ import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 
 import java.util.List;
 
@@ -24,7 +25,10 @@ public class PushConsumer {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(
                 "ConsumerGroupName");
         consumer.setNamesrvAddr("192.168.227.142:9876");
-        consumer.setInstanceName("Consumber");
+
+        consumer.setInstanceName("PushConsumer2");
+//        consumer.setMessageModel(MessageModel.BROADCASTING);
+        consumer.setMessageModel(MessageModel.CLUSTERING);
 
         /**
          * 订阅指定topic下tags分别等于TagA或TagC或TagD
@@ -34,7 +38,7 @@ public class PushConsumer {
          * 订阅指定topic下所有消息<br>
          * 注意：一个consumer对象可以订阅多个topic
          */
-        consumer.subscribe("TopicTest2", "*");
+        //consumer.subscribe("TopicTest2", "*");
 
         consumer.registerMessageListener(new MessageListenerConcurrently() {
 
