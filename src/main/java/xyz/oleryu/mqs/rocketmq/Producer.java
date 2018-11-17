@@ -26,7 +26,7 @@ public class Producer {
             try {
                 Message msg = new Message("OLERY_PRO_TEST",// topic
                         "TagA",// tag
-                        "OrderID001",// key
+                        "MSG_SEQ_" + String.valueOf(i),// key
                         ("Hello MetaQ").getBytes());// body
                 SendResult sendResult = producer.send(msg);
                 System.out.println(sendResult);
